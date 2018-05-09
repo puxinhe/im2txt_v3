@@ -21,7 +21,7 @@ test_file=test.zip
 pipeline_test_file_path=$output_dir/$test_file
 
 # 因为dataset里面的东西是不允许修改的，所以这里要把config文件复制一份到输出目录
-cp $dataset_dir/$test_file $pipeline_test_file_path
+#cp $dataset_dir/$test_file $pipeline_test_file_path
 
 if [ "$(uname)" == "Darwin" ]; then
   UNZIP="tar -xf"
@@ -29,5 +29,6 @@ else
   UNZIP="unzip -nq"
 fi
 
-echo "Unzipping ${pipeline_test_file_path}"
-${UNZIP} ${pipeline_test_file_path}
+FILE_NAME = $dataset_dir/$test_file
+echo "Unzipping ${FILE_NAME}"
+${UNZIP} ${FILE_NAME}
