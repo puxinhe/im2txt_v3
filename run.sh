@@ -29,6 +29,6 @@ else
   UNZIP="unzip -nq"
 fi
 
-FILE_NAME = $dataset_dir/$test_file
+FILE_NAME = $dataset_dir/test.zip
 echo "Unzipping ${FILE_NAME}"
 ${UNZIP} ${FILE_NAME}
