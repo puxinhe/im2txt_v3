@@ -170,6 +170,7 @@ class ImageDecoder(object):
 
     # TensorFlow ops for JPEG decoding.
     self._encoded_jpeg = tf.placeholder(dtype=tf.string)
+    #Decode a JPEG-encoded image to a uint8 tensor
     self._decode_jpeg = tf.image.decode_jpeg(self._encoded_jpeg, channels=3)
 
   def decode_jpeg(self, encoded_jpeg):
@@ -232,6 +233,8 @@ def _to_sequence_example(image, decoder, vocab):
       "image/caption": _bytes_feature_list(caption),
       "image/caption_ids": _int64_feature_list(caption_ids)
   })
+
+  #作为基本单位来进行数据读取: 一般用于文本、时间序列等没有固定长度大小的数据
   sequence_example = tf.train.SequenceExample(
       context=context, feature_lists=feature_lists)
 
