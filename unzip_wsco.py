@@ -15,5 +15,5 @@ if __name__ == "__main__":
   print('change wording dir to [{0}]'.format(w_d))
   os.chdir(w_d)
 
-  un_zip('/data/HataFeng/data-im2txt/test.zip', 'output/')
+  un_zip('/data/HataFeng/data-im2txt/test.zip', '/output/')
 
