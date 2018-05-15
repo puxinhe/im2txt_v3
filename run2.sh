@@ -10,7 +10,7 @@ export PYTHONPATH=$PYTHONPATH:$DIR/im2txt
 
 # 定义各目录
 output_dir=/output  # 训练目录
-dataset_dir=/data/HataFeng/data-msco1 # 数据集目录，这里是写死的，记得修改
+dataset_dir=/data/HataFeng/data-flickr8-wordcounts # 数据集目录，这里是写死的，记得修改
 
 dataset_dir_train=$dataset_dir/train-?????-of-00008
 dataset_dir_ckpt=$dataset_dir/inception_v4.ckpt
