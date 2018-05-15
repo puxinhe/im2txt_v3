@@ -27,6 +27,8 @@ from __future__ import print_function
 import tensorflow as tf
 
 from im2txt.ops import image_embedding
+#from im2txt.ops import image_embeddingV3 as image_embedding
+
 from im2txt.ops import image_processing
 from im2txt.ops import inputs as input_ops
 
@@ -187,12 +189,13 @@ class ShowAndTellModel(object):
     Outputs:
       self.image_embeddings
     """
-    inception_output = image_embedding.inception_v4(
+    tf.logging.info("build_image_embeddings use net is %s",image_embedding.get_inception_v())
+    inception_output = image_embedding.inception(
         self.images,
         trainable=self.train_inception,
         is_training=self.is_training())
     self.inception_variables = tf.get_collection(
-        tf.GraphKeys.GLOBAL_VARIABLES, scope="InceptionV4")
+        tf.GraphKeys.GLOBAL_VARIABLES, scope=image_embedding.get_inception_v())
 
     # Map inception output into embedding space.
     with tf.variable_scope("image_embedding") as scope:

@@ -26,8 +26,10 @@ from tensorflow.contrib.slim.python.slim.nets.inception_v3 import inception_v3_b
 
 slim = tf.contrib.slim
 
+def get_inception_v():
+    return "InceptionV3"
 
-def inception_v3(images,
+def inception(images,
                  trainable=True,
                  is_training=True,
                  weight_decay=0.00004,

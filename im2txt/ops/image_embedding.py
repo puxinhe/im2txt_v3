@@ -26,8 +26,10 @@ from im2txt.net.inception_v4 import inception_v4_base
 
 slim = tf.contrib.slim
 
+def get_inception_v():
+    return "InceptionV4"
 
-def inception_v4(images,
+def inception(images,
                  trainable=True,
                  is_training=True,
                  weight_decay=0.00004,
