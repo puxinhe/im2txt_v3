@@ -6,7 +6,7 @@ cd $DIR
 echo current dir is $PWD
 
 # 设置目录，避免module找不到的问题
-export PYTHONPATH=$PYTHONPATH:$DIR:$DIR/slim:$DIR/im2txt
+export PYTHONPATH=$PYTHONPATH:$DIR/im2txt
 
 # 定义各目录
 output_dir=/output  # 训练目录
