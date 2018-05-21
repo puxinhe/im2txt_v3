@@ -48,6 +48,6 @@ eval_dir=$output_dir/eval
 #python im2txt/evaluate.py --input_file_pattern=$dataset_dir_val --checkpoint_dir=$checkpoint_dir --eval_dir=$eval_dir
 
 echo "############  training for Fine Tune #################"
-python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=true --number_of_steps=200001
+python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$checkpoint_dir --train_dir=$train_dir --train_inception=true --number_of_steps=400001
 
 echo "############  end  #################"
