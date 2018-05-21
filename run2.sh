@@ -15,6 +15,8 @@ dataset_dir=/data/HataFeng/data-flickr8-wordcounts # 数据集目录，这里是
 dataset_dir_train=/data/HataFeng/data-flickr8/train-?????-of-00008
 dataset_dir_ckpt=/data/HataFeng/data-ckpt/inception_v4.ckpt
 
+dataset_dir_val=/data/HataFeng/data-flickr8-val/val-?????-of-00001
+
 dataset_dir_vocab_file=/data/HataFeng/data-flickr8-wordcounts/word_counts.txt
 dataset_dir_infe_file1=/data/HataFeng/data-flickr8-wordcounts/Filkr8_1928319708_ccf1f4ee72.jpg
 dataset_dir_infe_file2=/data/HataFeng/data-flickr8-wordcounts/COCO_val2014_000000224477.jpg
@@ -34,12 +36,18 @@ eval_dir=$output_dir/eval
 #echo "############ training #################"
 #python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=false --number_of_steps=200001
 
-echo "############  inference #################"
+#echo "############  inference #################"
 # 在test.jpg上验证导出的模型
-python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file1
-echo "############  inference #################"
-python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file2
-echo "############  inference #################"
-python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file3
+#python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file1
+#echo "############  inference #################"
+#python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file2
+#echo "############  inference #################"
+#python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file3
+
+#echo "############  evaluate #################"
+#python im2txt/evaluate.py --input_file_pattern=$dataset_dir_val --checkpoint_dir=$checkpoint_dir --eval_dir=$eval_dir
+
+echo "############  training for Fine Tune #################"
+python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=true --number_of_steps=200001
 
 echo "############  end  #################"
