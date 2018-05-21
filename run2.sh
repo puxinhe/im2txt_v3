@@ -34,7 +34,7 @@ eval_dir=$output_dir/eval
 #cp $DIR/object_detection/samples/configs/$config $pipeline_config_path
 
 echo "############ training with V3 #################"
-python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=false --number_of_steps=200001
+python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=false --number_of_steps=70001
 
 #echo "############  inference #################"
 # 在test.jpg上验证导出的模型
@@ -47,7 +47,7 @@ python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_che
 #echo "############  evaluate #################"
 #python im2txt/evaluate.py --input_file_pattern=$dataset_dir_val --checkpoint_dir=$checkpoint_dir --eval_dir=$eval_dir
 
-#echo "############  training for Fine Tune #################"
-#python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$checkpoint_dir --train_dir=$train_dir --train_inception=true --number_of_steps=400001
+echo "############  training for Fine Tune #################"
+python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$checkpoint_dir --train_dir=$train_dir --train_inception=true --number_of_steps=140001
 
 echo "############  end  #################"
