@@ -16,7 +16,9 @@ dataset_dir_train=/data/HataFeng/data-flickr8/train-?????-of-00008
 dataset_dir_ckpt=/data/HataFeng/data-ckpt/inception_v4.ckpt
 
 dataset_dir_vocab_file=/data/HataFeng/data-flickr8-wordcounts/word_counts.txt
-dataset_dir_infe_file=/data/HataFeng/data-flickr8-wordcounts/1928319708_ccf1f4ee72.jpg
+dataset_dir_infe_file1=/data/HataFeng/data-flickr8-wordcounts/1928319708_ccf1f4ee72.jpg
+dataset_dir_infe_file2=/data/HataFeng/data-flickr8-wordcounts/COCO_val2014_000000224477.jpg
+dataset_dir_infe_file3=/data/HataFeng/data-flickr8-wordcounts/random_1.jpg
 
 train_dir=$output_dir/train
 checkpoint_dir=$train_dir
@@ -34,6 +36,10 @@ eval_dir=$output_dir/eval
 
 echo "############  inference #################"
 # 在test.jpg上验证导出的模型
-python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file
+python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file1
+echo "############  inference #################"
+python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file2
+echo "############  inference #################"
+python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file3
 
 echo "############  end  #################"
