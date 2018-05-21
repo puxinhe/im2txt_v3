@@ -16,7 +16,7 @@ dataset_dir_train=/data/HataFeng/data-flickr8/train-?????-of-00008
 dataset_dir_ckpt=/data/HataFeng/data-ckpt/inception_v4.ckpt
 
 dataset_dir_vocab_file=/data/HataFeng/data-flickr8-wordcounts/word_counts.txt
-dataset_dir_infe_file=/data-flickr8-wordcounts/1928319708_ccf1f4ee72.jpg
+dataset_dir_infe_file=/data/HataFeng/data-flickr8-wordcounts/1928319708_ccf1f4ee72.jpg
 
 train_dir=$output_dir/train
 checkpoint_dir=$train_dir
@@ -29,8 +29,8 @@ eval_dir=$output_dir/eval
 # 因为dataset里面的东西是不允许修改的，所以这里要把config文件复制一份到输出目录
 #cp $DIR/object_detection/samples/configs/$config $pipeline_config_path
 
-echo "############ training #################"
-python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=false --number_of_steps=200001
+#echo "############ training #################"
+#python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=false --number_of_steps=200001
 
 echo "############  inference #################"
 # 在test.jpg上验证导出的模型
