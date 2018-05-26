@@ -100,23 +100,27 @@ import numpy as np
 from six.moves import xrange
 import tensorflow as tf
 
-tf.flags.DEFINE_string("train_image_dir", "/tmp/train2014/",
+tf.flags.DEFINE_string("train_image_dir", "/tmp/Flicker8k_Dataset/",
                        "Training image directory.")
-tf.flags.DEFINE_string("val_image_dir", "/tmp/val2014",
+tf.flags.DEFINE_string("val_image_dir", "/tmp/Flicker8k_Dataset/",
                        "Validation image directory.")
 
-tf.flags.DEFINE_string("train_captions_file", "/tmp/captions_train2014.json",
-                       "Training captions JSON file.")
-tf.flags.DEFINE_string("val_captions_file", "/tmp/captions_val2014.json",
-                       "Validation captions JSON file.")
+
+tf.flags.DEFINE_string("caption_file", "/tmp/Flickr8k.token.txt",
+                       "Captions TXT file.")
+
+tf.flags.DEFINE_string("train_file_list", "/tmp/Flickr_8k.trainImages.txt",
+                       "Training TXT file.")
+tf.flags.DEFINE_string("val_file_list", "/tmp/Flickr_8k.devImages.txt",
+                       "Validation TXT file.")
 
 tf.flags.DEFINE_string("output_dir", "/tmp/", "Output data directory.")
 
-tf.flags.DEFINE_integer("train_shards", 256,
+tf.flags.DEFINE_integer("train_shards", 8,
                         "Number of shards in training TFRecord files.")
-tf.flags.DEFINE_integer("val_shards", 4,
+tf.flags.DEFINE_integer("val_shards", 1,
                         "Number of shards in validation TFRecord files.")
-tf.flags.DEFINE_integer("test_shards", 8,
+tf.flags.DEFINE_integer("test_shards", 1,
                         "Number of shards in testing TFRecord files.")
 
 tf.flags.DEFINE_string("start_word", "<S>",
@@ -398,7 +402,7 @@ def _process_caption(caption):
   return tokenized_caption
 
 
-def _load_and_process_metadata(captions_file, image_dir):
+def _load_and_process_metadata(flie_list_txt, captions_file, image_dir):
   """Loads image metadata from a JSON file and processes the captions.
 
   Args:
@@ -408,6 +412,17 @@ def _load_and_process_metadata(captions_file, image_dir):
   Returns:
     A list of ImageMetadata.
   """
+
+  with tf.gfile.FastGFile(flie_list_txt, "r") as f:
+    _flie_list = f.readlines()
+
+  flie_list={}
+  for flie in _flie_list:
+    flie = flie.strip().split('\t')
+    _image_id = int(flie[0].split('_')[0])
+    flie_list.setdefault(_image_id, [])
+    flie_list[_image_id] = flie
+
   #captions_file = 'G:/csdn_ai_homework/end/data/Flickr8k_text/Flickr8k.token.txt'
   with tf.gfile.FastGFile(captions_file, "r") as f:
     caption_data = f.readlines()
@@ -416,18 +431,19 @@ def _load_and_process_metadata(captions_file, image_dir):
   id_to_filename = {}
   for line in caption_data:
     line = line.strip().split('\t')
-    image_id = line[0].split('_')[0]
-    file_name = line[0].split('#')[0]
-    caption = line[1]
+    image_id = int(line[0].split('_')[0])
+    if image_id in flie_list:
+      file_name = line[0].split('#')[0]
+      caption = line[1]
 
-    id_to_filename.setdefault(image_id, [])
-    id_to_filename[image_id] = file_name
+      id_to_filename.setdefault(image_id, [])
+      id_to_filename[image_id] = file_name
 
-    id_to_captions.setdefault(image_id, [])
-    id_to_captions[image_id].append(caption)
+      id_to_captions.setdefault(image_id, [])
+      id_to_captions[image_id].append(caption)
 
   assert len(id_to_filename) == len(id_to_captions)
-  assert set([x[0] for x in id_to_filename]) == set(id_to_captions.keys())
+
   print("Loaded caption metadata for %d images from %s" %
         (len(id_to_filename), captions_file))
 
@@ -435,7 +451,8 @@ def _load_and_process_metadata(captions_file, image_dir):
   print("Processing captions.")
   image_metadata = []
   num_captions = 0
-  for image_id, base_filename in id_to_filename:
+  for image_id in id_to_filename:
+    base_filename=id_to_filename[image_id]
     filename = os.path.join(image_dir, base_filename)
     captions = [_process_caption(c) for c in id_to_captions[image_id]]
     image_metadata.append(ImageMetadata(image_id, filename, captions))
@@ -462,10 +479,8 @@ def main(unused_argv):
     tf.gfile.MakeDirs(FLAGS.output_dir)
 
   # Load image metadata from caption files.
-  mscoco_train_dataset = _load_and_process_metadata(FLAGS.train_captions_file,
-                                                    FLAGS.train_image_dir)
-  mscoco_val_dataset = _load_and_process_metadata(FLAGS.val_captions_file,
-                                                  FLAGS.val_image_dir)
+  mscoco_train_dataset = _load_and_process_metadata(FLAGS.train_file_list, FLAGS.caption_file, FLAGS.train_image_dir)
+  mscoco_val_dataset = _load_and_process_metadata(FLAGS.val_file_list, FLAGS.caption_file, FLAGS.val_image_dir)
 
   # Redistribute the MSCOCO data as follows:
   #   train_dataset = 100% of mscoco_train_dataset + 85% of mscoco_val_dataset.
