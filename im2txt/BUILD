@@ -26,6 +26,21 @@ sh_binary(
     ],
 )
 
+py_binary(
+    name = "build_flickr8_data",
+    srcs = [
+        "data/build_flickr8_data.py",
+    ],
+)
+
+sh_binary(
+    name = "download_and_preprocess_flickr8",
+    srcs = ["data/download_and_preprocess_flickr8.sh"],
+    data = [
+        ":build_flickr8_data",
+    ],
+)
+
 py_library(
     name = "configuration",
     srcs = ["configuration.py"],

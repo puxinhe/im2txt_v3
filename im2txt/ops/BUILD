@@ -14,6 +14,17 @@ py_library(
     name = "image_embedding",
     srcs = ["image_embedding.py"],
     srcs_version = "PY2AND3",
+    deps = [
+        "//im2txt/net:inception_v4",
+    ],
+)
+
+
+
+py_library(
+    name = "image_embeddingV3",
+    srcs = ["image_embeddingV3.py"],
+    srcs_version = "PY2AND3",
 )
 
 py_test(
