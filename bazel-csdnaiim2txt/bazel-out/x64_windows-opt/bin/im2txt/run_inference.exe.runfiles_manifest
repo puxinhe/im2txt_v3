@@ -1,0 +1,17 @@
+im2txt/im2txt/__init__.py 
+im2txt/im2txt/configuration.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/configuration.py
+im2txt/im2txt/inference_utils/__init__.py 
+im2txt/im2txt/inference_utils/caption_generator.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/inference_utils/caption_generator.py
+im2txt/im2txt/inference_utils/inference_wrapper_base.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/inference_utils/inference_wrapper_base.py
+im2txt/im2txt/inference_utils/vocabulary.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/inference_utils/vocabulary.py
+im2txt/im2txt/inference_wrapper.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/inference_wrapper.py
+im2txt/im2txt/net/__init__.py 
+im2txt/im2txt/net/inception_v4.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/net/inception_v4.py
+im2txt/im2txt/ops/__init__.py 
+im2txt/im2txt/ops/image_embedding.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/ops/image_embedding.py
+im2txt/im2txt/ops/image_processing.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/ops/image_processing.py
+im2txt/im2txt/ops/inputs.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/ops/inputs.py
+im2txt/im2txt/run_inference.exe C:/users/fbjwy/_bazel_fbjwy/o_r-ypgw/execroot/im2txt/bazel-out/x64_windows-opt/bin/im2txt/run_inference.exe
+im2txt/im2txt/run_inference.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/run_inference.py
+im2txt/im2txt/run_inference.zip C:/users/fbjwy/_bazel_fbjwy/o_r-ypgw/execroot/im2txt/bazel-out/x64_windows-opt/bin/im2txt/run_inference.zip
+im2txt/im2txt/show_and_tell_model.py G:/csdn_ai_homework/end/code2/csdnaiim2txt/im2txt/show_and_tell_model.py
