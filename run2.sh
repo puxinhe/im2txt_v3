@@ -36,13 +36,13 @@ eval_dir=$output_dir/eval
 echo "############ training with V3 #################"
 python ./im2txt/train.py --input_file_pattern=$dataset_dir_train --inception_checkpoint_file=$dataset_dir_ckpt --train_dir=$train_dir --train_inception=false --number_of_steps=70001
 
-#echo "############  inference #################"
+echo "############  inference #################"
 # 在test.jpg上验证导出的模型
 python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file1
-echo "############  inference #################"
-python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file2
-echo "############  inference #################"
-python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file3
+#echo "############  inference #################"
+#python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file2
+#echo "############  inference #################"
+#python ./im2txt/run_inference.py --checkpoint_path=$checkpoint_dir --vocab_file=$dataset_dir_vocab_file --input_files=$dataset_dir_infe_file3
 
 #echo "############  evaluate #################"
 #python im2txt/evaluate.py --input_file_pattern=$dataset_dir_val --checkpoint_dir=$checkpoint_dir --eval_dir=$eval_dir
