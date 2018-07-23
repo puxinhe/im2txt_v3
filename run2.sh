@@ -13,7 +13,7 @@ output_dir=/output  # 训练目录
 dataset_dir=/data/HataFeng/data-flickr8-wordcounts # 数据集目录，这里是写死的，记得修改
 
 dataset_dir_train=/data/HataFeng/data-flickr8/train-?????-of-00008
-dataset_dir_ckpt=/data/HataFeng/data-ckpt/inception_v3.ckpt
+dataset_dir_ckpt=/data/HataFeng/data-msco/inception_v3.ckpt
 
 dataset_dir_val=/data/HataFeng/data-flickr8-val/val-?????-of-00001
 
