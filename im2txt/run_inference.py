@@ -30,8 +30,8 @@ from im2txt.inference_utils import caption_generator
 from im2txt.inference_utils import vocabulary
 
 
-from docx import Document
-from docx.shared import Inches
+#from docx import Document
+#from docx.shared import Inches
 
 
 FLAGS = tf.flags.FLAGS
@@ -68,7 +68,7 @@ def main(_):
                   len(filenames), FLAGS.input_files)
 
 
-  document = Document()
+  #document = Document()
 
   with tf.Session(graph=g) as sess:
     # Load the model from checkpoint.
@@ -87,10 +87,10 @@ def main(_):
       str1 = ("Captions for image %s:" % os.path.basename(filename))
       print(str1)
 
-      paragraph = document.add_paragraph("inferent:%s" % filename)
-      paragraph.paragraph_format.page_break_before = True
-      document.add_picture(filename, width=Inches(3))
-      document.add_paragraph(str1)
+      #paragraph = document.add_paragraph("inferent:%s" % filename)
+      #paragraph.paragraph_format.page_break_before = True
+      #document.add_picture(filename, width=Inches(3))
+      #document.add_paragraph(str1)
 
       for i, caption in enumerate(captions):
         # Ignore begin and end words.
@@ -100,10 +100,10 @@ def main(_):
         str1 = ("  %d) %s (p=%f)" % (i, sentence, math.exp(caption.logprob)))
         print(str1)
 
-        document.add_paragraph(str1)
+        #document.add_paragraph(str1)
 
-    output_dir = ("%s/Captions.docx" % FLAGS.output_dir)
-    document.save(output_dir)
+    #output_dir = ("%s/Captions.docx" % FLAGS.output_dir)
+    #document.save(output_dir)
 
 if __name__ == "__main__":
   tf.app.run()
